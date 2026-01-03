@@ -17,7 +17,6 @@ The project structure has been initialized. Here's what was created:
 - ✅ `backend/app/main.py` - FastAPI entry point
 - ✅ `backend/app/config.py` - Configuration management
 - ✅ `.gitignore` files (root, frontend, backend)
-- ✅ `docker-compose.yml` - MongoDB & Qdrant setup
 - ✅ `README.md` - Complete setup instructions
 
 ### Next Steps
@@ -52,10 +51,9 @@ The project structure has been initialized. Here's what was created:
    - Configure MongoDB URL if needed
    - Other settings have sensible defaults
 
-5. **Start MongoDB** (if using Docker):
-   ```bash
-   docker-compose up -d mongodb
-   ```
+5. **Configure MongoDB**:
+   - Use MongoDB Atlas (cloud) - update `MONGODB_URL` in `backend/.env`
+   - Or install MongoDB locally
 
 6. **Run the Application**:
    ```bash
@@ -77,7 +75,6 @@ Check that these files exist:
 - ✅ `backend/app/main.py`
 - ✅ `backend/app/config.py`
 - ✅ `README.md`
-- ✅ `docker-compose.yml`
 
 If `.env.example` files are missing, create them manually using the templates in `README.md`.
 

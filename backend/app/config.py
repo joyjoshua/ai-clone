@@ -12,14 +12,14 @@ class Settings(BaseSettings):
     
     # Vector Database Configuration
     VECTOR_DB: str = "chromadb"  # "chromadb" or "qdrant"
-    CHROMADB_PATH: str = "./chroma_db"
-    CHROMADB_COLLECTION_NAME: str = "ai_knowledge_base"
+    CHROMADB_PATH: str = "./chroma_db_data"
+    CHROMADB_COLLECTION_NAME: str = "ai_clone_vectors"
     QDRANT_URL: str = "http://localhost:6333"
     QDRANT_COLLECTION_NAME: str = "ai_clone_vectors"
     
     # Groq Configuration
-    GROQ_API_KEY: str = ""
-    GROQ_MODEL: str = "llama-3.1-70b-versatile"
+    GROQ_API_KEY: str = ""  # Load from .env file - DO NOT hardcode API keys
+    GROQ_MODEL: str = "llama-3.1-8b-instant"
     
     # Embedding Model Configuration
     EMBEDDING_MODEL: str = "sentence-transformers"
@@ -28,7 +28,7 @@ class Settings(BaseSettings):
     
     # Server Configuration
     BACKEND_PORT: int = 8000
-    CORS_ORIGINS: List[str] = ["http://localhost:5173"]
+    CORS_ORIGINS: str = "http://localhost:5173"
     
     # File Upload Configuration
     MAX_FILE_SIZE_MB: int = 10
@@ -37,9 +37,9 @@ class Settings(BaseSettings):
     # RAG Configuration
     CHUNK_SIZE: int = 500
     CHUNK_OVERLAP: int = 100
-    TOP_K_RETRIEVAL: int = 3
+    TOP_K_RETRIEVAL: int = 4
     SCORE_THRESHOLD: float = 0.7
-    MEMORY_HISTORY_LENGTH: int = 8
+    MEMORY_HISTORY_LENGTH: int = 5
     
     # Logging
     LOG_LEVEL: str = "INFO"

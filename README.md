@@ -25,7 +25,6 @@ Build an AI Clone application that uses RAG (Retrieval-Augmented Generation) to 
 ai-clone/
 ├── frontend/          # React + TypeScript frontend
 ├── backend/           # FastAPI backend
-├── docker-compose.yml # MongoDB & Qdrant (optional)
 └── README.md
 ```
 
@@ -87,21 +86,16 @@ cp .env.example .env
 ### 4. Database Setup
 
 **MongoDB:**
-- Option 1: Use Docker Compose (recommended for development)
-  ```bash
-  docker-compose up -d mongodb
-  ```
-- Option 2: Install MongoDB locally or use MongoDB Atlas (cloud)
+- Use MongoDB Atlas (cloud) - recommended
+  - Sign up at https://www.mongodb.com/cloud/atlas
+  - Create a free cluster
+  - Get your connection string
+  - Update `MONGODB_URL` in `backend/.env`
+- Or install MongoDB locally if preferred
 
 **ChromaDB:**
 - No setup needed! ChromaDB uses local file storage
-- The database will be created automatically in `./chroma_db` when first used
-
-**Qdrant (Optional):**
-- Only if you want to use Qdrant instead of ChromaDB
-  ```bash
-  docker-compose --profile qdrant up -d qdrant
-  ```
+- The database will be created automatically in `./chroma_db_data` when first used
 
 ## Running the Application
 
@@ -179,9 +173,10 @@ See `idea.md` for the complete implementation plan and Phase 2 features.
 ## Troubleshooting
 
 ### MongoDB Connection Issues
-- Ensure MongoDB is running: `docker-compose ps`
-- Check connection string in `.env`
-- Verify MongoDB is accessible on port 27017
+- Check connection string in `.env` (should be MongoDB Atlas URL)
+- Verify MongoDB Atlas cluster is running and accessible
+- Ensure IP whitelist includes your IP address (for MongoDB Atlas)
+- Check username/password in connection string are correct
 
 ### ChromaDB Issues
 - Ensure write permissions in the project directory

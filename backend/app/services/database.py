@@ -26,14 +26,14 @@ async def connect_to_mongo():
         
         # Test connection
         await db.client.admin.command('ping')
-        logger.info(f"✅ Connected to MongoDB: {settings.MONGODB_DB_NAME}")
+        logger.info(f"[OK] Connected to MongoDB: {settings.MONGODB_DB_NAME}")
         
         # Create indexes
         await create_indexes()
         
         return True
     except Exception as e:
-        logger.error(f"❌ Failed to connect to MongoDB: {e}")
+        logger.error(f"[ERROR] Failed to connect to MongoDB: {e}")
         raise
 
 async def close_mongo_connection():
@@ -48,21 +48,21 @@ async def create_indexes():
         # Conversations collection indexes
         conversations_collection = db.database.conversations
         await conversations_collection.create_index([("user_id", 1), ("created_at", -1)])
-        logger.info("✅ Created indexes for conversations collection")
+        logger.info("[OK] Created indexes for conversations collection")
         
         # Documents collection indexes
         documents_collection = db.database.documents
         await documents_collection.create_index([("user_id", 1), ("created_at", -1)])
         await documents_collection.create_index([("title", "text")])
-        logger.info("✅ Created indexes for documents collection")
+        logger.info("[OK] Created indexes for documents collection")
         
         # Users collection indexes
         users_collection = db.database.users
         await users_collection.create_index([("user_id", 1)], unique=True)
-        logger.info("✅ Created indexes for users collection")
+        logger.info("[OK] Created indexes for users collection")
         
     except Exception as e:
-        logger.warning(f"⚠️ Error creating indexes (may already exist): {e}")
+        logger.warning(f"[WARNING] Error creating indexes (may already exist): {e}")
 
 async def get_database() -> AsyncIOMotorDatabase:
     """Get database instance"""

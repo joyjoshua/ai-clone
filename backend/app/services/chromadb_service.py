@@ -35,11 +35,11 @@ class ChromaDBService:
             )
             
             self._initialized = True
-            logger.info(f"✅ ChromaDB initialized: {settings.CHROMADB_COLLECTION_NAME}")
+            logger.info(f"[OK] ChromaDB initialized: {settings.CHROMADB_COLLECTION_NAME}")
             return True
             
         except Exception as e:
-            logger.error(f"❌ Failed to initialize ChromaDB: {e}")
+            logger.error(f"[ERROR] Failed to initialize ChromaDB: {e}")
             raise
     
     async def ensure_initialized(self):
@@ -82,11 +82,11 @@ class ChromaDBService:
                 metadatas=metadata
             )
             
-            logger.info(f"✅ Stored {len(chunks)} chunks in ChromaDB")
+            logger.info(f"[OK] Stored {len(chunks)} chunks in ChromaDB")
             return ids
             
         except Exception as e:
-            logger.error(f"❌ Error storing embeddings: {e}")
+            logger.error(f"[ERROR] Error storing embeddings: {e}")
             raise
     
     async def query_similar(
@@ -131,7 +131,7 @@ class ChromaDBService:
             return formatted_results
             
         except Exception as e:
-            logger.error(f"❌ Error querying ChromaDB: {e}")
+            logger.error(f"[ERROR] Error querying ChromaDB: {e}")
             raise
     
     async def delete_chunks(self, chunk_ids: List[str]) -> bool:
@@ -140,10 +140,10 @@ class ChromaDBService:
         
         try:
             self.collection.delete(ids=chunk_ids)
-            logger.info(f"✅ Deleted {len(chunk_ids)} chunks from ChromaDB")
+            logger.info(f"[OK] Deleted {len(chunk_ids)} chunks from ChromaDB")
             return True
         except Exception as e:
-            logger.error(f"❌ Error deleting chunks: {e}")
+            logger.error(f"[ERROR] Error deleting chunks: {e}")
             return False
     
     async def get_collection_stats(self) -> Dict[str, Any]:
@@ -158,7 +158,7 @@ class ChromaDBService:
                 "path": settings.CHROMADB_PATH
             }
         except Exception as e:
-            logger.error(f"❌ Error getting collection stats: {e}")
+            logger.error(f"[ERROR] Error getting collection stats: {e}")
             return {}
     
     async def test_connection(self) -> bool:

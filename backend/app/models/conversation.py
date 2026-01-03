@@ -14,14 +14,15 @@ class Message(BaseModel):
     content: str = Field(..., description="Message content")
     timestamp: datetime = Field(default_factory=datetime.utcnow)
 
-    class Config:
-        json_schema_extra = {
+    model_config = {
+        "json_schema_extra": {
             "example": {
                 "role": "user",
                 "content": "Hello, how are you?",
                 "timestamp": "2024-01-01T12:00:00Z"
             }
         }
+    }
 
 
 class Conversation(BaseModel):
@@ -32,11 +33,11 @@ class Conversation(BaseModel):
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
 
-    class Config:
-        populate_by_name = True
-        arbitrary_types_allowed = True
-        json_encoders = {ObjectId: str}
-        json_schema_extra = {
+    model_config = {
+        "populate_by_name": True,
+        "arbitrary_types_allowed": True,
+        "json_encoders": {ObjectId: str},
+        "json_schema_extra": {
             "example": {
                 "user_id": "user123",
                 "messages": [
@@ -53,6 +54,7 @@ class Conversation(BaseModel):
                 ]
             }
         }
+    }
 
     def add_message(self, role: Literal["user", "assistant"], content: str):
         """Add a message to the conversation"""

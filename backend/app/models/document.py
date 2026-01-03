@@ -32,11 +32,11 @@ class Document(BaseModel):
         description="Processing status"
     )
 
-    class Config:
-        populate_by_name = True
-        arbitrary_types_allowed = True
-        json_encoders = {ObjectId: str}
-        json_schema_extra = {
+    model_config = {
+        "populate_by_name": True,
+        "arbitrary_types_allowed": True,
+        "json_encoders": {ObjectId: str},
+        "json_schema_extra": {
             "example": {
                 "user_id": "user123",
                 "title": "My Document",
@@ -50,4 +50,5 @@ class Document(BaseModel):
                 "status": "completed"
             }
         }
+    }
 
